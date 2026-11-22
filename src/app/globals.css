@@ -197,5 +197,10 @@ svg { flex-shrink: 0; }
   .modal { padding: 16px; }
 }
 @media (max-width: 350px) {
+  .sidebar nav a svg { display: none; }
   .donut-layout { grid-template-columns: 1fr; }
+  .recent-heading { gap: 7px; }
+  .recent-heading .panel-icon { width: 29px; height: 29px; }
+  .recent-panel .panel-heading { gap: 7px; }
+  .text-link { gap: 4px; padding-inline: 4px; }
 }
