@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Tipo {
+  RECEITA
+  DESPESA
+}
+
+model Categoria {
+  id            String        @id @default(cuid())
+  nome          String
+  tipo          Tipo
+  movimentacoes Movimentacao[]
+
+  @@unique([nome, tipo])
+  @@unique([id, tipo])
+}
+
+model Movimentacao {
+  id             String    @id @default(cuid())
+  descricao      String    @db.VarChar(120)
+  valorCentavos  Int
+  data           DateTime  @db.Date
+  tipo           Tipo
+  categoriaId    String
+  categoria      Categoria @relation(fields: [categoriaId, tipo], references: [id, tipo], onDelete: Restrict, onUpdate: Restrict)
+  criadaEm       DateTime  @default(now())
+  atualizadaEm   DateTime  @updatedAt
+
+  @@index([data, criadaEm, id])
+  @@index([categoriaId, tipo])
+}

@@ -1,0 +1,18 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: meu_controle
+      POSTGRES_PASSWORD: meu_controle
+      POSTGRES_DB: meu_controle
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - dados:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U meu_controle -d meu_controle"]
+      interval: 3s
+      timeout: 3s
+      retries: 15
+volumes:
+  dados:
