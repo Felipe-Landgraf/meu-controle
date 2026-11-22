@@ -12,7 +12,14 @@ Aplicação local para registrar receitas e despesas. O dashboard mostra o saldo
    cp .env.example .env
    ```
 
-   No PowerShell, use `Copy-Item .env.example .env` no lugar de `cp`.
+   No PowerShell, execute:
+
+   ```powershell
+   npm.cmd ci
+   Copy-Item .env.example .env
+   ```
+
+   O `npm.cmd` funciona quando a política de execução do PowerShell bloqueia o script `npm.ps1`.
 
 3. Suba o PostgreSQL e aguarde o banco aceitar conexões.
 
@@ -35,6 +42,14 @@ Aplicação local para registrar receitas e despesas. O dashboard mostra o saldo
    npm run dev
    ```
 
+   No PowerShell, execute:
+
+   ```powershell
+   npm.cmd run db:migrate
+   npm.cmd run db:seed
+   npm.cmd run dev
+   ```
+
 5. Abra [Meu Controle no navegador](http://localhost:3000).
 
 O seed inclui movimentações fictícias no mês atual e no anterior. Ele usa identificadores estáveis por mês e não duplica registros de demonstração que já existem. Mantenha o volume do Compose para preservar os dados entre reinícios do PostgreSQL.
@@ -47,7 +62,7 @@ npm run lint
 npm run build
 ```
 
-Depois do build, inicie a versão de produção com `npm start`.
+No PowerShell, use `npm.cmd` nesses comandos. Depois do build, inicie a versão de produção com `npm start` ou `npm.cmd start` no PowerShell.
 
 ## Organização do código
 
