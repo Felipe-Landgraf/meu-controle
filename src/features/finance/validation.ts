@@ -3,7 +3,7 @@ import { validDate } from "@/lib/calendar";
 import { parseCents } from "@/lib/money";
 import { TYPES } from "./types";
 
-export const transactionSchema = z.object({
+const transactionFields = z.object({
   tipo: z.enum(TYPES, { error: "Escolha receita ou despesa." }),
   descricao: z.string().trim().min(1, "Informe uma descrição.").max(120, "Use até 120 caracteres."),
   valor: z.string().max(30, "Informe um valor válido.").transform((value, context) => {
@@ -15,3 +15,8 @@ export const transactionSchema = z.object({
   categoriaId: z.string().trim().min(1, "Selecione uma categoria.").max(100, "Categoria inválida."),
   data: z.string().refine(validDate, "Informe uma data válida."),
 });
+
+export const transactionSchema = z.preprocess((form: FormData) => {
+  if (!(form instanceof FormData)) return form;
+  return Object.fromEntries(Object.keys(transactionFields.shape).map((key) => [key, form.get(key) ?? ""]));
+}, transactionFields);

@@ -2,9 +2,12 @@ import Link from "next/link";
 import { ChevronDown, Search, SlidersHorizontal } from "lucide-react";
 import { TYPES, TYPE_LABEL, type Category, type Filters } from "./types";
 
-export function TransactionFilters({ filters, categories }: { filters: Filters; categories: Category[] }) {
+export function TransactionFilters({ filters, categories, demo = false }: {
+  filters: Filters; categories: Category[]; demo?: boolean;
+}) {
   const key = JSON.stringify(filters);
-  return <form key={key} action="/movimentacoes" method="get" className="panel filter-panel" aria-label="Filtros de movimentações">
+  return <form key={key} action={demo ? undefined : "/movimentacoes"} method="get" className="panel filter-panel" aria-label="Filtros de movimentações">
+    {demo && <input type="hidden" name="tela" value="movimentacoes" />}
     <div className="filter-title"><SlidersHorizontal size={17} /><h2>Filtros</h2></div>
     <div className="filter-grid">
       <div className="field search-field"><label htmlFor="filter-description">Descrição</label>

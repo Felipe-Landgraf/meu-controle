@@ -64,6 +64,19 @@ npm run build
 
 No PowerShell, use `npm.cmd` nesses comandos. Depois do build, inicie a versão de produção com `npm start` ou `npm.cmd start` no PowerShell.
 
+## Demonstração pública
+
+[Abrir Meu Controle](https://felipe-landgraf.github.io/meu-controle/)
+
+A demonstração usa a mesma interface, regras de validação e exemplos da aplicação local. Ela funciona sem servidor e salva as alterações no navegador do visitante. Use valores fictícios ao experimentar.
+
+```sh
+npm run demo:build
+npm run demo:preview
+```
+
+O GitHub Pages publica a versão de demonstração por meio do workflow em `.github/workflows/demo.yml`.
+
 ## Organização do código
 
 - `src/app` contém as rotas e o layout do App Router.

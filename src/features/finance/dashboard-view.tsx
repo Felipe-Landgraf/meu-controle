@@ -3,13 +3,10 @@ import { ArrowDownLeft, ArrowRight, ArrowUpRight, ChartNoAxesColumn, CircleDolla
 import { MonthPicker } from "@/components/month-picker";
 import { brl } from "@/lib/money";
 import { monthlyFiltersHref } from "./filters";
-import type { dashboard } from "./queries";
-import type { Category } from "./types";
+import type { Category, Dashboard } from "./types";
 import { ExpenseDonut, MonthlyBars } from "./charts";
 import { NewTransaction } from "./transaction-dialog";
 import { TransactionTable } from "./transaction-table";
-
-type Dashboard = Awaited<ReturnType<typeof dashboard>>;
 
 export function DashboardView({ month, today, options, data }: {
   month: string; today: string; options: Category[]; data: Dashboard;

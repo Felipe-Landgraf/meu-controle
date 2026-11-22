@@ -33,6 +33,8 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "prisma/**/*.ts",
+    "demo/**/*.ts",
+    "demo/**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts"
   ],

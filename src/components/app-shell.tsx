@@ -9,7 +9,7 @@ const links = [
   { href: "/movimentacoes", label: "Movimentações", Icon: ArrowLeftRight },
 ];
 
-export function AppShell({ children }: { children: React.ReactNode }) {
+export function AppShell({ children, demo = false }: { children: React.ReactNode; demo?: boolean }) {
   const pathname = usePathname();
   return <div className="app-shell">
     <a href="#conteudo" className="skip-link">Pular para o conteúdo</a>
@@ -28,7 +28,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       </nav>
       <div className="sidebar-footer">
         <span className="footer-icon"><ShieldCheck size={17} /></span>
-        <div><strong>Modo local</strong><small>Seus dados neste dispositivo</small></div>
+        <div><strong>{demo ? "Modo demonstração" : "Modo local"}</strong><small>{demo ? "Dados de exemplo neste navegador" : "Seus dados neste dispositivo"}</small></div>
       </div>
     </aside>
     <main id="conteudo" className="main-content" tabIndex={-1}>{children}</main>

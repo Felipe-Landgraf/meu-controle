@@ -3,7 +3,7 @@
 import { useId, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { ChevronDown, Pencil, Plus, Trash2, X } from "lucide-react";
-import { deleteTransaction, saveTransaction } from "./actions";
+import { deleteTransaction, saveTransaction } from "@/features/finance/actions";
 import { TYPES, TYPE_LABEL, type Category, type Transaction, type TransactionType } from "./types";
 import { moneyInput } from "@/lib/money";
 

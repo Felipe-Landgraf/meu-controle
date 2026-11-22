@@ -5,16 +5,10 @@ import { revalidatePath } from "next/cache";
 import { calendarDate } from "@/lib/calendar";
 import { db } from "@/lib/db";
 import { transactionSchema } from "./validation";
+import type { MutationResult } from "./types";
 
-type Field = "tipo" | "descricao" | "valor" | "categoriaId" | "data";
-type Result =
-  | { ok: true }
-  | { ok: false; message: string; fields?: Partial<Record<Field, string[]>> };
-
-export async function saveTransaction(id: string | null, form: FormData): Promise<Result> {
-  const input = Object.fromEntries(["tipo", "descricao", "valor", "categoriaId", "data"]
-    .map((key) => [key, form.get(key) ?? ""]));
-  const parsed = transactionSchema.safeParse(input);
+export async function saveTransaction(id: string | null, form: FormData): Promise<MutationResult> {
+  const parsed = transactionSchema.safeParse(form);
   if (!parsed.success) {
     return { ok: false, message: "Confira os campos destacados.", fields: parsed.error.flatten().fieldErrors };
   }
@@ -45,7 +39,7 @@ export async function saveTransaction(id: string | null, form: FormData): Promis
   return { ok: true };
 }
 
-export async function deleteTransaction(id: string): Promise<Result> {
+export async function deleteTransaction(id: string): Promise<MutationResult> {
   try {
     await db.movimentacao.delete({ where: { id } });
   } catch (error) {
